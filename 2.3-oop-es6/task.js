@@ -58,20 +58,21 @@ class Book extends PrintEditionItem{
 
 class NovelBook  extends Book{
     constructor(author, name, releaseDate, pagesCount) {
-        super(name, releaseDate, pagesCount);
-        this.author = author;
+        super(author, name, releaseDate, pagesCount);
         this.type = "novel";
     }
-}class FantasticBook  extends Book{
+}
+
+class FantasticBook  extends Book{
     constructor(author, name, releaseDate, pagesCount) {
-        super(name, releaseDate, pagesCount);
-        this.author = author;
+        super(author, name, releaseDate, pagesCount);
         this.type = "fantastic";
     }
-}class DetectiveBook  extends Book{
+}
+
+class DetectiveBook  extends Book{
     constructor(author, name, releaseDate, pagesCount) {
-        super(name, releaseDate, pagesCount);
-        this.author = author;
+        super(author, name, releaseDate, pagesCount);
         this.type = "detective";
     }
 }
@@ -91,7 +92,7 @@ class Library {
         }
     }
 
-    findBookBy(type, value) {   
+    findBookBy(type, value) {
         for (let book of this.books)
         {
             if (this.#isBookAppropriate(book, type, value)) {
@@ -179,7 +180,7 @@ class StudentLog {
 
         let summaryAverages = 0;
         this.#subjects.forEach(subject => {
-           summaryAverages += subject.getAverage();
+            summaryAverages += subject.getAverage();
         });
 
         return summaryAverages / length;
