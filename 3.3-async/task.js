@@ -1,3 +1,5 @@
+
+
 class AlarmClock {
     constructor() {
         this.alarmCollection = new Array();
@@ -8,8 +10,6 @@ class AlarmClock {
         if (!this.#checkId(id)) {
             throw new Error('error text');
         }
-
-        let test = this.#findAlarm(id);
 
         if (this.#findAlarm(id)) {
             console.error();
@@ -35,7 +35,7 @@ class AlarmClock {
         return false;
     }
 
-    getCurrentFormattedTime(id) {
+    getCurrentFormattedTime() {
         return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
@@ -45,7 +45,7 @@ class AlarmClock {
                 this.alarmCollection.forEach((alarm) => {
                     this.#checkClock(alarm);
                 });
-            });
+            }, 5000);
         }
     }
 
@@ -66,14 +66,14 @@ class AlarmClock {
     }
 
     clearAlarms() {
-        stop();
+        this.stop();
         const length = this.alarmCollection.length;
         this.alarmCollection.splice(0, length);
     }
 
     #checkClock(currentClock) {
-        const date =  Date.now().toLocaleString([], { hour: '2-digit', minute: '2-digit' });
-        if (currentClock.time === date) {
+        if (currentClock.time === this.getCurrentFormattedTime()) {
+            //this.removeClock(currentClock.id);
             currentClock.callback();
         }
     }
@@ -89,14 +89,14 @@ class AlarmClock {
 
 function testCase() {
     let phoneAlarm = new AlarmClock();
-    phoneAlarm.addClock("09:00", () => console.log(`Пора вставать`), 1);
-    phoneAlarm.addClock("09:01", () => {
+    phoneAlarm.addClock("23:37", () => console.log(`Пора вставать`), 1);
+    phoneAlarm.addClock("23:38", () => {
         console.log(`Давай, вставай уже!`);
         phoneAlarm.removeClock(2)
     }, 2);
-    phoneAlarm.addClock("09:01", () => console.log(`Иди умываться!`));
+    //phoneAlarm.addClock("09:01", () => console.log(`Иди умываться!`));
 
-    phoneAlarm.addClock("09:02", () => {
+    phoneAlarm.addClock("23.37", () => {
        console.log(`Вставай, а то проспишь!`);
        phoneAlarm.clearAlarms();
        phoneAlarm.printAlarms();
